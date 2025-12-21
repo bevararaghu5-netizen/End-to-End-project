@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/m-prasanna/devops-resume-project.git'
+        git 'https://github.com/m-prasanna/End-to-End-DevOps-Pipeline-using-Docker-Jenkins-Kubernetes-Monitoring.git'
       }
     }
     stage('Build Docker Image') {
