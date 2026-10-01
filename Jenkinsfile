@@ -1,20 +1,54 @@
 pipeline {
-  agent any
-  stages {
+agent any
+
+```
+stages {
+
     stage('Clone Repo') {
-      steps {
-        git 'https://github.com/m-prasanna/End-to-End-DevOps-Pipeline-using-Docker-Jenkins-Kubernetes-Monitoring.git'
-      }
+        steps {
+            git branch: 'main',
+                url: 'https://github.com/bevararaghu5-netizen/End-to-End-project.git'
+        }
     }
+
     stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t devops-web .'
-      }
+        steps {
+            bat '''
+                echo ===== DOCKER VERSION =====
+                docker --version
+
+                echo ===== BUILDING DOCKER IMAGE =====
+                docker build -t devops-web:1.0 .
+
+                if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
+
+                echo ===== DOCKER IMAGES =====
+                docker images
+            '''
+        }
     }
+
     stage('Deploy to Kubernetes') {
-      steps {
-        sh 'kubectl apply -f k8s/'
-      }
+        steps {
+            bat '''
+                echo ===== KUBECTL VERSION =====
+                kubectl version --client
+
+                echo ===== KUBERNETES NODES =====
+                kubectl get nodes
+
+                echo ===== APPLYING KUBERNETES FILES =====
+                kubectl apply -f k8s/
+
+                echo ===== KUBERNETES PODS =====
+                kubectl get pods
+
+                echo ===== KUBERNETES SERVICES =====
+                kubectl get services
+            '''
+        }
     }
-  }
+}
+```
+
 }
