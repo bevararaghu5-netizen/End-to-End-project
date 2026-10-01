@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG = 'C:\\Users\\Bevara Manoj Kumar\\.kube\\config'
+    }
+
     stages {
 
         stage('Clone Repo') {
@@ -32,6 +36,9 @@ pipeline {
                 bat '''
                     echo ===== KUBECTL VERSION =====
                     kubectl version --client
+
+                    echo ===== KUBECONFIG =====
+                    echo %KUBECONFIG%
 
                     echo ===== KUBERNETES CONTEXT =====
                     kubectl config current-context
