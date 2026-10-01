@@ -1,3 +1,4 @@
+@"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,5 +16,7 @@ spec:
       containers:
       - name: devops-container
         image: devops-web:1.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
+"@ | Set-Content k8s/deployment.yaml
