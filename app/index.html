@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewsHub - Your Source for Breaking News</title>
+
+    <title>DevOps Control Center</title>
+
     <style>
         * {
             margin: 0;
@@ -13,656 +14,568 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
         }
 
-        /* Header & Navigation */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 0;
+            background: #111827;
+            border-bottom: 1px solid #334155;
+            padding: 20px 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
         }
 
-        .top-bar {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px 0;
-            font-size: 0.85rem;
-        }
-
-        .top-bar .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .date-time {
-            display: flex;
             gap: 20px;
-        }
-
-        .social-links a {
-            color: white;
-            margin-left: 15px;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .social-links a:hover {
-            opacity: 0.7;
-        }
-
-        .main-header {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 24px;
             font-weight: bold;
-            letter-spacing: 2px;
+            color: #38bdf8;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 10px;
-        }
-
-        nav a:hover {
-            color: #ffd700;
-        }
-
-        .search-box {
+        .status {
             display: flex;
             align-items: center;
-        }
-
-        .search-box input {
-            padding: 8px 15px;
-            border: none;
+            gap: 8px;
+            background: #064e3b;
+            color: #6ee7b7;
+            padding: 8px 14px;
             border-radius: 20px;
-            outline: none;
-            width: 200px;
+            font-size: 14px;
         }
 
-        /* Breaking News Banner */
-        .breaking-news {
-            background: #d32f2f;
-            color: white;
-            padding: 10px 0;
-            overflow: hidden;
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background: #22c55e;
+            border-radius: 50%;
         }
 
-        .breaking-news .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .hero {
+            text-align: center;
+            padding: 70px 20px 50px;
         }
 
-        .breaking-label {
-            background: white;
-            color: #d32f2f;
-            padding: 5px 15px;
-            font-weight: bold;
-            border-radius: 3px;
-            white-space: nowrap;
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #f8fafc;
         }
 
-        .breaking-text {
-            animation: scroll-left 20s linear infinite;
+        .hero h1 span {
+            color: #38bdf8;
         }
 
-        @keyframes scroll-left {
-            0% {
-                transform: translateX(100%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
+        .hero p {
+            color: #94a3b8;
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
         }
 
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #f8fafc;
         }
 
-        .content-grid {
+        .card-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        /* Featured Article */
-        .featured {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .featured:hover {
-            transform: translateY(-5px);
-        }
-
-        .featured-img {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .featured-content {
-            padding: 25px;
-        }
-
-        .category-badge {
-            display: inline-block;
-            background: #1e3c72;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .featured h2 {
-            font-size: 2rem;
-            margin: 15px 0;
-            color: #1e3c72;
-        }
-
-        .article-meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin: 10px 0;
-        }
-
-        .article-meta span {
-            margin-right: 15px;
-        }
-
-        /* News Grid */
-        .news-grid {
-            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-top: 20px;
+            margin-bottom: 50px;
         }
 
-        .news-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 15px;
-            transition: transform 0.3s;
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .news-card:hover {
-            transform: translateX(5px);
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
         }
 
-        .news-thumb {
-            width: 180px;
-            height: 120px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
         }
 
-        .news-content {
-            padding: 15px;
-            flex: 1;
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f8fafc;
         }
 
-        .news-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #1e3c72;
-        }
-
-        .news-content p {
-            font-size: 0.9rem;
-            color: #666;
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
             line-height: 1.5;
         }
 
-        /* Sidebar */
-        .sidebar {
+        .success {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .pipeline {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .pipeline-flow {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .sidebar-widget {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .widget-title {
-            font-size: 1.3rem;
-            color: #1e3c72;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #1e3c72;
-        }
-
-        .trending-item {
-            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
         }
 
-        .trending-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            opacity: 0.3;
+        .pipeline-stage {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            padding: 20px 10px;
         }
 
-        .trending-text h4 {
-            font-size: 0.95rem;
-            margin-bottom: 5px;
-        }
-
-        .trending-text span {
-            font-size: 0.8rem;
-            color: #999;
-        }
-
-        /* Newsletter */
-        .newsletter-form input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .pipeline-stage .icon {
+            font-size: 30px;
             margin-bottom: 10px;
-            font-size: 0.95rem;
         }
 
-        .newsletter-form button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: transform 0.3s;
+        .pipeline-stage h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: #f8fafc;
         }
 
-        .newsletter-form button:hover {
-            transform: scale(1.05);
+        .pipeline-stage p {
+            font-size: 12px;
+            color: #94a3b8;
         }
 
-        /* Footer */
-        footer {
-            background: #1e3c72;
-            color: white;
-            padding: 40px 0 20px;
-            margin-top: 50px;
+        .arrow {
+            font-size: 25px;
+            color: #38bdf8;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .info-section {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 50px;
         }
 
-        .footer-section h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .info-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
         }
 
-        .footer-section ul {
-            list-style: none;
+        .info-box h2 {
+            margin-bottom: 20px;
+            color: #f8fafc;
         }
 
-        .footer-section ul li {
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 13px 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #94a3b8;
+        }
+
+        .info-value {
+            color: #38bdf8;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .tech {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tech h3 {
+            color: #f8fafc;
             margin-bottom: 8px;
         }
 
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s;
+        .tech p {
+            color: #94a3b8;
+            font-size: 13px;
         }
 
-        .footer-section a:hover {
-            color: white;
+        .about {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
         }
 
-        .footer-bottom {
+        .about h2 {
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .about p {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #111827;
+            border-top: 1px solid #334155;
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            color: #64748b;
+            font-size: 14px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .content-grid {
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .card-grid,
+            .tech-grid {
                 grid-template-columns: 1fr;
             }
 
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                gap: 15px;
-                font-size: 0.9rem;
-            }
-
-            .news-card {
+            .pipeline-flow {
                 flex-direction: column;
             }
 
-            .news-thumb {
+            .pipeline-stage {
                 width: 100%;
-                height: 200px;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .header-content {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
+
     <header>
-        <div class="top-bar">
-            <div class="container">
-                <div class="date-time">
-                    <span id="current-date"></span>
-                    <span id="current-time"></span>
-                </div>
-                <div class="social-links">
-                    <a href="#"><strong>f</strong></a>
-                    <a href="#"><strong>t</strong></a>
-                    <a href="#"><strong>in</strong></a>
-                    <a href="#"><strong>ig</strong></a>
-                </div>
-            </div>
-        </div>
-        <div class="main-header">
-            <div class="logo">NEWSHUB</div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#world">World</a></li>
-                    <li><a href="#business">Business</a></li>
-                    <li><a href="#tech">Technology</a></li>
-                    <li><a href="#sports">Sports</a></li>
-                </ul>
-            </nav>
-            <div class="search-box">
-                <input type="text" placeholder="Search news...">
+        <div class="container header-content">
+            <div class="logo">⚙️ DevOps Control Center</div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                System Online
             </div>
         </div>
     </header>
 
-    <!-- Breaking News -->
-    <div class="breaking-news">
-        <div class="container">
-            <span class="breaking-label">BREAKING</span>
-            <div class="breaking-text">
-                Major tech conference announces groundbreaking AI developments • Markets reach new highs amid positive
-                economic data
+    <main>
+
+        <section class="hero container">
+            <h1>Deploy. <span>Monitor.</span> Automate.</h1>
+
+            <p>
+                End-to-end DevOps deployment using GitHub, Jenkins, Docker,
+                Kubernetes, Prometheus and Grafana.
+            </p>
+        </section>
+
+        <section class="container">
+
+            <h2 class="section-title">Deployment Overview</h2>
+
+            <div class="card-grid">
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Deployment</h3>
+                    <p>
+                        Kubernetes deployment is running successfully.
+                    </p>
+                    <p class="success">● Active</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">☸️</div>
+                    <h3>Kubernetes Pods</h3>
+                    <p>
+                        Application replicas running inside the Kubernetes cluster.
+                    </p>
+                    <p class="success">2 / 2 Running</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🐳</div>
+                    <h3>Docker Image</h3>
+                    <p>
+                        Container image used by the Kubernetes deployment.
+                    </p>
+                    <p class="success">devops-web:1.0</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Monitoring</h3>
+                    <p>
+                        Prometheus collects metrics and Grafana visualizes them.
+                    </p>
+                    <p class="success">● Online</p>
+                </div>
+
             </div>
-        </div>
-    </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="content-grid">
-            <!-- Main Column -->
-            <main>
-                <!-- Featured Article -->
-                <article class="featured">
-                    <div class="featured-img">Featured Image</div>
-                    <div class="featured-content">
-                        <span class="category-badge">Technology</span>
-                        <h2>Revolutionary AI System Transforms Healthcare Industry</h2>
-                        <div class="article-meta">
-                            <span>📅 December 21, 2025</span>
-                            <span>✍️ Sarah Johnson</span>
-                            <span>⏱️ 5 min read</span>
-                        </div>
-                        <p>A groundbreaking artificial intelligence system has been deployed across major hospitals,
-                            promising to revolutionize patient care and diagnostic accuracy. The new technology has
-                            shown remarkable results in early trials, with accuracy rates exceeding 95% in detecting
-                            critical conditions.</p>
+        </section>
+
+        <section class="container">
+
+            <h2 class="section-title">CI/CD Pipeline</h2>
+
+            <div class="pipeline">
+
+                <div class="pipeline-flow">
+
+                    <div class="pipeline-stage">
+                        <div class="icon">🐙</div>
+                        <h3>GitHub</h3>
+                        <p>Source Code</p>
                     </div>
-                </article>
 
-                <!-- News Grid -->
-                <div class="news-grid">
-                    <article class="news-card">
-                        <div class="news-thumb">Image</div>
-                        <div class="news-content">
-                            <span class="category-badge">Business</span>
-                            <h3>Global Markets React to Economic Policy Changes</h3>
-                            <div class="article-meta">
-                                <span>📅 Dec 21</span>
-                                <span>✍️ Michael Chen</span>
-                            </div>
-                            <p>Stock markets worldwide show mixed reactions as governments implement new fiscal
-                                strategies...</p>
-                        </div>
-                    </article>
+                    <div class="arrow">→</div>
 
-                    <article class="news-card">
-                        <div class="news-thumb">Image</div>
-                        <div class="news-content">
-                            <span class="category-badge">Sports</span>
-                            <h3>Championship Finals Set for Epic Showdown</h3>
-                            <div class="article-meta">
-                                <span>📅 Dec 21</span>
-                                <span>✍️ David Martinez</span>
-                            </div>
-                            <p>Two powerhouse teams prepare for what promises to be the most exciting finals in
-                                decades...</p>
-                        </div>
-                    </article>
-
-                    <article class="news-card">
-                        <div class="news-thumb">Image</div>
-                        <div class="news-content">
-                            <span class="category-badge">Science</span>
-                            <h3>New Discovery Could Change Climate Solutions</h3>
-                            <div class="article-meta">
-                                <span>📅 Dec 20</span>
-                                <span>✍️ Dr. Emma Wilson</span>
-                            </div>
-                            <p>Scientists unveil innovative carbon capture technology with unprecedented efficiency
-                                rates...</p>
-                        </div>
-                    </article>
-
-                    <article class="news-card">
-                        <div class="news-thumb">Image</div>
-                        <div class="news-content">
-                            <span class="category-badge">World</span>
-                            <h3>International Summit Addresses Global Challenges</h3>
-                            <div class="article-meta">
-                                <span>📅 Dec 20</span>
-                                <span>✍️ James Taylor</span>
-                            </div>
-                            <p>World leaders convene to discuss pressing issues facing the international community...
-                            </p>
-                        </div>
-                    </article>
-                </div>
-            </main>
-
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <!-- Trending -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">🔥 Trending Now</h3>
-                    <div class="trending-item">
-                        <div class="trending-number">1</div>
-                        <div class="trending-text">
-                            <h4>Tech Giant Unveils Next-Gen Devices</h4>
-                            <span>2 hours ago</span>
-                        </div>
+                    <div class="pipeline-stage">
+                        <div class="icon">🔨</div>
+                        <h3>Jenkins</h3>
+                        <p>CI/CD Pipeline</p>
                     </div>
-                    <div class="trending-item">
-                        <div class="trending-number">2</div>
-                        <div class="trending-text">
-                            <h4>Space Mission Returns with Samples</h4>
-                            <span>4 hours ago</span>
-                        </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="pipeline-stage">
+                        <div class="icon">🐳</div>
+                        <h3>Docker</h3>
+                        <p>Container Build</p>
                     </div>
-                    <div class="trending-item">
-                        <div class="trending-number">3</div>
-                        <div class="trending-text">
-                            <h4>Breakthrough in Renewable Energy</h4>
-                            <span>6 hours ago</span>
-                        </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="pipeline-stage">
+                        <div class="icon">☸️</div>
+                        <h3>Kubernetes</h3>
+                        <p>Deployment</p>
                     </div>
-                    <div class="trending-item">
-                        <div class="trending-number">4</div>
-                        <div class="trending-text">
-                            <h4>Economic Growth Exceeds Forecasts</h4>
-                            <span>8 hours ago</span>
-                        </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="pipeline-stage">
+                        <div class="icon">📈</div>
+                        <h3>Grafana</h3>
+                        <p>Monitoring</p>
                     </div>
+
                 </div>
 
-                <!-- Newsletter -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">📧 Newsletter</h3>
-                    <p style="margin-bottom: 15px; color: #666;">Get daily news updates delivered to your inbox.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
-                    </form>
+            </div>
+
+        </section>
+
+        <section class="container info-section">
+
+            <div class="info-box">
+
+                <h2>Infrastructure</h2>
+
+                <div class="info-row">
+                    <span class="info-label">Deployment</span>
+                    <span class="info-value">devops-deployment</span>
                 </div>
 
-                <!-- Categories -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">📑 Categories</h3>
-                    <ul>
-                        <li><a href="#">Technology (245)</a></li>
-                        <li><a href="#">Business (189)</a></li>
-                        <li><a href="#">Sports (156)</a></li>
-                        <li><a href="#">Health (134)</a></li>
-                        <li><a href="#">Entertainment (128)</a></li>
-                        <li><a href="#">Science (98)</a></li>
-                    </ul>
+                <div class="info-row">
+                    <span class="info-label">Container</span>
+                    <span class="info-value">devops-container</span>
                 </div>
-            </aside>
-        </div>
-    </div>
 
-    <!-- Footer -->
+                <div class="info-row">
+                    <span class="info-label">Replicas</span>
+                    <span class="info-value">2</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Container Port</span>
+                    <span class="info-value">80</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Service</span>
+                    <span class="info-value">devops-service</span>
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <h2>Container & Monitoring</h2>
+
+                <div class="info-row">
+                    <span class="info-label">Docker Image</span>
+                    <span class="info-value">devops-web:1.0</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Base Image</span>
+                    <span class="info-value">nginx:alpine</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Metrics</span>
+                    <span class="info-value">Prometheus</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Dashboard</span>
+                    <span class="info-value">Grafana</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Environment</span>
+                    <span class="info-value">Minikube</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="container">
+
+            <h2 class="section-title">Technology Stack</h2>
+
+            <div class="tech-grid">
+
+                <div class="tech">
+                    <h3>🐙 GitHub</h3>
+                    <p>Source code management and version control</p>
+                </div>
+
+                <div class="tech">
+                    <h3>🔨 Jenkins</h3>
+                    <p>Continuous integration and deployment</p>
+                </div>
+
+                <div class="tech">
+                    <h3>🐳 Docker</h3>
+                    <p>Application containerization</p>
+                </div>
+
+                <div class="tech">
+                    <h3>☸️ Kubernetes</h3>
+                    <p>Container orchestration and deployment</p>
+                </div>
+
+                <div class="tech">
+                    <h3>🔥 Prometheus</h3>
+                    <p>Infrastructure and Kubernetes metrics</p>
+                </div>
+
+                <div class="tech">
+                    <h3>📊 Grafana</h3>
+                    <p>Monitoring dashboards and visualization</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="container">
+
+            <div class="about">
+
+                <h2>About This Project</h2>
+
+                <p>
+                    This project demonstrates an end-to-end DevOps workflow.
+                    Application source code is maintained in GitHub and the
+                    Jenkins pipeline automates the build process. Docker is
+                    used to package the application into a container image,
+                    while Kubernetes manages the application deployment and
+                    replicas. Prometheus collects Kubernetes metrics and
+                    Grafana provides monitoring dashboards for the deployed
+                    application and infrastructure.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About NewsHub</h3>
-                <p>Your trusted source for breaking news, in-depth analysis, and stories that matter.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Advertise</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Sections</h3>
-                <ul>
-                    <li><a href="#">World News</a></li>
-                    <li><a href="#">Politics</a></li>
-                    <li><a href="#">Opinion</a></li>
-                    <li><a href="#">Lifestyle</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                    <li><a href="#">Guidelines</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 NewsHub. All rights reserved.</p>
-        </div>
+        <p>
+            DevOps Control Center | GitHub → Jenkins → Docker → Kubernetes → Prometheus → Grafana
+        </p>
     </footer>
 
-    <script>
-        // Update date and time
-        function updateDateTime() {
-            const now = new Date();
-            const dateEl = document.getElementById('current-date');
-            const timeEl = document.getElementById('current-time');
-
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            dateEl.textContent = now.toLocaleDateString('en-US', options);
-            timeEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        }
-
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
-
-        // Newsletter form
-        document.querySelector('.newsletter-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('Thank you for subscribing to our newsletter!');
-            this.reset();
-        });
-    </script>
 </body>
-
 </html>
